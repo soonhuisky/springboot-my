@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soonhui.mine.mapper.UserMapper">
+
+    <sql id="User_Column_List">
+		id,username,password,visitors,score
+	</sql>
+
+    <select id="getUserById" resultType="com.soonhui.mine.bean.User">
+        SELECT
+        <include refid="User_Column_List"/>
+        FROM USER
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="getUserByUserName" resultType="com.soonhui.mine.bean.User">
+        SELECT
+        <include refid="User_Column_List"/>
+        FROM USER
+        WHERE
+        username=#{userName}
+    </select>
+
+    <select id="getAllUsers" resultType="com.soonhui.mine.bean.User">
+        SELECT
+        <include refid="User_Column_List"/>
+        FROM
+        USER
+    </select>
+
+    <delete id="deleteUserById">
+        DELETE
+        FROM USER
+        WHERE
+        id=#{id}
+    </delete>
+
+    <insert id="insertUser">
+        INSERT INTO
+        USER(userName,password,visitors,score)
+        VALUES(#{userName},#{password},#{visitors},#{score})
+    </insert>
+
+    <!--两种UPDATE方式，第二种在性能上更好一些-->
+
+    <!--<update id="updateUser" parameterType="com.soonhui.mine.bean.User">-->
+        <!--UPDATE USER-->
+        <!--SET-->
+        <!--sex=#{sex},availablenumber=#{availableNumber}-->
+        <!--WHERE-->
+        <!--username=#{userName}-->
+    <!--</update>-->
+
+    <update id="updateUser">
+        UPDATE USER
+        <set >
+            <if test="username != null" >
+                username = #{userName},
+            </if>
+            <if test="password != null" >
+                sex = #{sex},
+            </if>
+            <if test="visitors != null" >
+                visitors = #{visitors},
+            </if>
+            <if test="score != null" >
+                score = #{score},
+            </if>
+        </set>
+        WHERE
+        id=#{id}
+    </update>
+
+</mapper>

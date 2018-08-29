@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soonhui.mine.mapper.BlogMapper">
+
+    <sql id="Blog_Column_List">
+		id,title,content,pubdate,views,likes
+	</sql>
+
+    <select id="getBlogById" resultType="com.soonhui.mine.bean.Blog">
+        SELECT
+        <include refid="Blog_Column_List" />
+        FROM BLOG
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="getBlogByTitle" resultType="com.soonhui.mine.bean.Blog">
+        SELECT
+        <include refid="Blog_Column_List" />
+        FROM BLOG
+        WHERE
+        title=#{title}
+    </select>
+
+    <select id="getAllBlogs" resultType="com.soonhui.mine.bean.Blog">
+        SELECT
+        <include refid="Blog_Column_List" />
+        FROM BLOG
+    </select>
+
+    <delete id="deleteBlogById">
+        DELETE
+        FROM BLOG
+        WHERE
+        id=#{id}
+    </delete>
+
+    <insert id="insertBlog">
+        INSERT INTO
+        BLOG(title,content,pubdate,views,likes)
+        VALUES(#{title},#{content},#{pubDate},#{views},#{likes})
+    </insert>
+
+    <update id="updateBlog">
+        UPDATE BLOG
+        <set >
+            <if test="title != null" >
+                title = #{title},
+            </if>
+            <if test="content != null" >
+                content = #{content},
+            </if>
+            <if test="pubdate != null" >
+                pubdate = #{pubDate},
+            </if>
+            <if test="views != null" >
+                views = #{views},
+            </if>
+            <if test="likes != null" >
+                likes = #{likes},
+            </if>
+        </set>
+        WHERE
+        id=#{id}
+    </update>
+
+</mapper>
