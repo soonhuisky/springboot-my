@@ -11,6 +11,7 @@ public class MineApplicationTests {
 
     @Test
     public void contextLoads() {
+        System.out.println("hello");
     }
 
 }
