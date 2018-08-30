@@ -13,6 +13,8 @@ public class MineApplicationTests {
     public void contextLoads() {
         System.out.println("hello");
         System.out.println("hello");
+        System.out.println("hello");
+        System.out.println("hello");
     }
 
 }
