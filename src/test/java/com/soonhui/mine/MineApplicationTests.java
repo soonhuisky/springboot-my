@@ -14,7 +14,7 @@ public class MineApplicationTests {
         System.out.println("hello");
         System.out.println("hello");
               System.out.println("hello");
-        System.out.println("11223");
+        System.out.println("112236666");
     }
 
 }
